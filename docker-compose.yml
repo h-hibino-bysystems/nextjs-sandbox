@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  node:
+    image: node:20-bookworm
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    user: 1000:1000
+    tty: true
+    # command: sh -c 'npm install && npm start'
+    ports:
+      - "3000:3000"
