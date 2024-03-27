@@ -4,7 +4,7 @@ services:
     image: node:20-bookworm
     volumes:
       - ./:/usr/src/app
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/nextjs-sandbox
     user: 1000:1000
     tty: true
     # command: sh -c 'npm install && npm start'
