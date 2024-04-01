@@ -17,7 +17,7 @@ jobs:
 
       # キャッシュの復元
       - name: Cache test.txt
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v2
         with:
           path: nextjs-sandbox/.reg/**
           key: vrt-captures-${{ github.sha }} # defaultブランチの最新のキャッシュを参照したい
