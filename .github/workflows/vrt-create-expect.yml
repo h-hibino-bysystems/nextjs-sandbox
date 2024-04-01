@@ -1,4 +1,4 @@
-name: Cache HelloWorld File on Node Container
+name: VRT-検証元となる画像の作成
 
 on:
   push:
