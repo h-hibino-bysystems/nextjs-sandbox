@@ -23,6 +23,7 @@ jobs:
           key: vrt-captures-${{ github.sha }} # defaultブランチの最新のキャッシュを参照したい
           restore-keys: |
             vrt-captures-
+            vrt-
 
       # キャッシュされた test.txt を表示
       - name: Display cached test.txt
