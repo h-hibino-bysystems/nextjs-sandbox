@@ -24,10 +24,10 @@ jobs:
 
       # test.txt のキャッシュ
       - name: Cache test.txt
-        uses: actions/cache@v4
+        uses: actions/cache/save@v4
         with:
           path: nextjs-sandbox/.reg/test.txt
-          key: vrt-expected-captures
+          key: vrt-captures-${{ hashFiles('nextjs-sandbox/.reg/**') }}
 
       # test.txt がキャッシュされているか確認
       - name: Check if test.txt is cached
