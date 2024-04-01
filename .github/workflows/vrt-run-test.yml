@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: nextjs-sandbox/.reg/**
-          key: vrt-captures-${{ github.sha }}
+          key: vrt-captures-${{ github.sha }} # defaultブランチの最新のキャッシュを参照したい
           restore-keys: vrt-captures-
         fail-on-cache-miss: true
 
