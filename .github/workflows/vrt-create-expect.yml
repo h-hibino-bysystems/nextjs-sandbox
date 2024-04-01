@@ -1,33 +1,34 @@
-name: Cache HelloWorld File on Node Container
+name: VRT-検証元となる画像の作成
 
 on:
   push:
     branches:
       - develop
-    paths:
-      - "README.md"
   workflow_dispatch:
 
 jobs:
   cache-readme:
-    runs-on: ubuntu-latest # この行はコンテナを使用するために必要、ジョブ自体は指定したコンテナ内で実行される
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     container:
-      image: node:20 # Node.js のバージョン 20 を使用
+      image: node:20
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Cache README.md
-        uses: actions/cache@v2
-        with:
-          path: |
-            README.md
-          key: ${{ runner.os }}-readme-${{ hashFiles('README.md') }}
-
-      - name: Check if README.md is cached
+      # ダミーキャッシュファイルの作成
+      - name: Create dummy cache file
         run: |
-          if [ -f README.md ]; then
-            echo "README.md is cached"
-          else
-            echo "README.md is not cached"
-          fi
+          mkdir -p nextjs-sandbox/.reg
+          echo "testtext" > nextjs-sandbox/.reg/test.txt
+
+      # test.txt のキャッシュ
+      - name: Cache test.txt
+        uses: actions/cache@v4
+        with:
+          path: nextjs-sandbox/.reg/test.txt
+          key: vrt-expected-captures
+
+      # test.txt がキャッシュされているか確認
+      - name: Check if test.txt is cached
+        run: cat nextjs-sandbox/.reg/test.txt
