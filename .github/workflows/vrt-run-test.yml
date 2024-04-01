@@ -2,7 +2,7 @@ name: VRT-テスト実行
 
 on:
   pull_request:
-    branches-ignore:
+    branches:
       - develop
     types: [opened, synchronize, reopened]
 
@@ -17,7 +17,6 @@ jobs:
 
       # キャッシュの復元
       - name: Cache test.txt
-        id: cache-test-txt
         uses: actions/cache@v4
         with:
           path: nextjs-sandbox/.reg/test.txt

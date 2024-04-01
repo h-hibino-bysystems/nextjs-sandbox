@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  cache-readme:
+  cache-expected-captures:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:
@@ -20,7 +20,7 @@ jobs:
       - name: Create dummy cache file
         run: |
           mkdir -p nextjs-sandbox/.reg
-          echo "testtext" > nextjs-sandbox/.reg/test.txt
+          echo "testtext-changed" > nextjs-sandbox/.reg/test.txt
 
       # test.txt のキャッシュ
       - name: Cache test.txt
