@@ -2,8 +2,6 @@ name: VRT-テスト実行
 
 on:
   pull_request:
-    branches-ignore:
-      - develop
     types: [opened, synchronize, reopened]
 
 jobs:
