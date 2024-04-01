@@ -9,6 +9,7 @@ on:
 jobs:
   cache-readme:
     runs-on: ubuntu-latest # この行はコンテナを使用するために必要、ジョブ自体は指定したコンテナ内で実行される
+    timeout-minutes: 10
     container:
       image: node:20 # Node.js のバージョン 20 を使用
 
@@ -20,12 +21,7 @@ jobs:
         with:
           path: |
             README.md
-          key: ${{ runner.os }}-readme-${{ hashFiles('README.md') }}
+          key: vrt-expected-captures
 
       - name: Check if README.md is cached
-        run: |
-          if [ -f README.md ]; then
-            echo "README.md is cached"
-          else
-            echo "README.md is not cached"
-          fi
+        run: cat "README.md"
