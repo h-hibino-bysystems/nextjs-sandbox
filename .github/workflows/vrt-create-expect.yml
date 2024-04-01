@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  cache-readme:
+  cache-expected-captures:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:
