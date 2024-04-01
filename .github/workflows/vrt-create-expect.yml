@@ -1,0 +1,33 @@
+name: Cache HelloWorld File on Node Container
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "README.md"
+  workflow_dispatch:
+
+jobs:
+  cache-readme:
+    runs-on: ubuntu-latest # この行はコンテナを使用するために必要、ジョブ自体は指定したコンテナ内で実行される
+    container:
+      image: node:20 # Node.js のバージョン 20 を使用
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache README.md
+        uses: actions/cache@v2
+        with:
+          path: |
+            README.md
+          key: ${{ runner.os }}-readme-${{ hashFiles('README.md') }}
+
+      - name: Check if README.md is cached
+        run: |
+          if [ -f README.md ]; then
+            echo "README.md is cached"
+          else
+            echo "README.md is not cached"
+          fi
