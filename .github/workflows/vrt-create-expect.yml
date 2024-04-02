@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: "20.x"
           cache: npm
-          working-directory: ./nextjs-sandbox
+          cache-dependency-path: ./nextjs-sandbox
 
       - name: Set up chromium
         run: |
