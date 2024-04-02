@@ -20,13 +20,13 @@ jobs:
       - name: Create dummy cache file
         run: |
           mkdir -p nextjs-sandbox/.reg
-          echo "testtext-changed" > nextjs-sandbox/.reg/test.txt
+          echo "testtext-changed-2" > nextjs-sandbox/.reg/test.txt
 
       # test.txt のキャッシュ
       - name: Cache test.txt
         uses: actions/cache/save@v4
         with:
-          path: nextjs-sandbox/.reg/test.txt
+          path: nextjs-sandbox/.reg/
           key: vrt-captures-${{ github.sha }}
 
       # test.txt がキャッシュされているか確認
