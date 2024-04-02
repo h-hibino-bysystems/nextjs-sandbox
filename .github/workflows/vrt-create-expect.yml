@@ -9,18 +9,33 @@ on:
 jobs:
   cache-expected-captures:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     container:
       image: node:20
 
     steps:
       - uses: actions/checkout@v4
 
-      # ダミーキャッシュファイルの作成
-      - name: Create dummy cache file
+      - name: Set up chromium
         run: |
           mkdir -p nextjs-sandbox/.reg
           echo "testtext-changed-2" > nextjs-sandbox/.reg/test.txt
+          apt-get update
+          apt-get install -y 
+          libx11-xcb1
+          libxcomposite1
+          libxcursor1
+          libxdamage1
+          libxi6
+          libxtst6
+          libcups2
+          libxss1
+          libxrandr2
+          libasound2
+          libpango-1.0-0
+          libatk1.0-0
+          libatk-bridge2.0-0
+          libgtk-3-0
 
       # test.txt のキャッシュ
       - name: Cache test.txt
