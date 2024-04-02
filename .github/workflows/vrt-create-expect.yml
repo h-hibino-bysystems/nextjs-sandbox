@@ -20,11 +20,11 @@ jobs:
           node-version: "20.x"
           cache: npm
           cache-dependency-path: ./nextjs-sandbox
+      - run: npm ci
 
       - name: Set up chromium
         working-directory: ./nextjs-sandbox
         run: |
-          ls -a
           mkdir .reg
           echo "testtext-changed-2" > .reg/test.txt
 
@@ -44,7 +44,7 @@ jobs:
           libatk1.0-0 \
           libatk-bridge2.0-0 \
           libgtk-3-0
-          npm run storybook
+          npm run install:chrome
 
       # test.txt のキャッシュ
       - name: Cache test.txt
