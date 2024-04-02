@@ -19,7 +19,7 @@ jobs:
       - name: Cache test.txt
         uses: actions/cache/restore@v4
         with:
-          path: nextjs-sandbox/.reg/**
+          path: nextjs-sandbox/.reg/
           key: vrt-captures-${{ github.event.pull_request.base.sha }}
 
       # キャッシュされた test.txt を表示
