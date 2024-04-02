@@ -22,10 +22,12 @@ jobs:
           cache-dependency-path: ./nextjs-sandbox
 
       - name: Set up chromium
+        working-directory: ./nextjs-sandbox
         run: |
           ls -a
-          mkdir -p nextjs-sandbox/.reg
-          echo "testtext-changed-2" > nextjs-sandbox/.reg/test.txt
+          mkdir .reg
+          echo "testtext-changed-2" > .reg/test.txt
+
           apt-get update
           apt-get install -y \
           libx11-xcb1 \
