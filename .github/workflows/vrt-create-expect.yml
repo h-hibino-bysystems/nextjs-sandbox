@@ -23,6 +23,7 @@ jobs:
 
       - name: Set up chromium
         run: |
+          ls -a
           mkdir -p nextjs-sandbox/.reg
           echo "testtext-changed-2" > nextjs-sandbox/.reg/test.txt
           apt-get update
