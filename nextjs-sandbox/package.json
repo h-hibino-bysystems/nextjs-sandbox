@@ -11,7 +11,8 @@
     "build-storybook": "storybook build -o ./storybook-static",
     "storycap": "storycap http://localhost:6006 -o .reg/expected --exclude \"Scrap/**\" --puppeteerLaunchConfig \"{ \\\"ignoreDefaultArgs\\\": [\\\"--hide-scrollbars\\\"] }\"",
     "install:chrome": "node node_modules/puppeteer/install.mjs",
-    "server-storycap": "storycap --serverCmd \"npm run storybook\" http://localhost:6006 --serverTimeout 600000"
+    "server-storycap": "storycap --serverCmd \"npm run storybook\" http://localhost:6006 --serverTimeout 600000",
+    "reg-suite": "reg-suite compare"
   },
   "dependencies": {
     "@conform-to/react": "^1.0.5",
@@ -34,6 +35,7 @@
     "@storybook/nextjs": "^8.0.5",
     "storybook": "^8.0.5",
     "storycap": "^4.3.1",
+    "reg-suit": "^0.14.3",
     "puppeteer": "^22.6.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",

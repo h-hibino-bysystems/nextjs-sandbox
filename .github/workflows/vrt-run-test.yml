@@ -60,7 +60,7 @@ jobs:
 
           npm run install:chrome
           npm run server-storycap
-          reg-suit compare
+          npm run reg-suit
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
