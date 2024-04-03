@@ -1,0 +1,68 @@
+name: "Cache base caputre"
+
+on:
+  workflow_call:
+    inputs:
+      git-commit-hash:
+        required: true
+        type: string
+
+jobs:
+  cache-base-caputre:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git-commit-hash }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: npm
+          cache-dependency-path: ./nextjs-sandbox
+
+      - name: install node modules
+        working-directory: ./nextjs-sandbox
+        run: npm ci
+
+      - name: Set up chromium
+        working-directory: ./nextjs-sandbox
+        run: |
+          apt-get update
+          apt-get install -y \
+          libx11-xcb1 \
+          libxcomposite1 \
+          libxcursor1 \
+          libxdamage1 \
+          libxi6 \
+          libxtst6 \
+          libcups2 \
+          libxss1 \
+          libxrandr2 \
+          libasound2 \
+          libpango-1.0-0 \
+          libatk1.0-0 \
+          libatk-bridge2.0-0 \
+          libgtk-3-0 \
+          libnss3 \
+          libgbm-dev \
+          libdrm-dev 
+          npm run install:chrome
+
+      - name: Run storycap
+        run: |
+          npm run server-storycap
+          mkdir .reg
+          mv __screenshots__ .reg/expected
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: nextjs-sandbox/.reg/expected
+
+      - name: Cache expected captures
+        uses: actions/cache/save@v4
+        with:
+          path: nextjs-sandbox/.reg/expected
+          key: vrt-captures-${{ inputs.git-commit-hash }}

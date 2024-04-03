@@ -13,8 +13,6 @@ jobs:
       image: node:20
 
     steps:
-      - uses: actions/checkout@v4
-
       # キャッシュの復元
       - name: Cache test.txt
         uses: actions/cache/restore@v4
@@ -25,6 +23,8 @@ jobs:
             vrt-captures-
 
       # キャッシュされた test.txt を表示
+      - uses: actions/checkout@v4
+
       - name: Display cached test.txt
         run: |
           if [ -f nextjs-sandbox/.reg/test.txt ]; then
