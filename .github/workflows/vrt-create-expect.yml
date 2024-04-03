@@ -47,7 +47,8 @@ jobs:
           libatk1.0-0 \
           libatk-bridge2.0-0 \
           libgtk-3-0 \
-          libnss3
+          libnss3 \
+          libdrm
           npm run install:chrome
           npm run server-storycap
 
