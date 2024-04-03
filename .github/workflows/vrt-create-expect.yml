@@ -48,7 +48,8 @@ jobs:
           libatk-bridge2.0-0 \
           libgtk-3-0 \
           libnss3 \
-          libgbm 
+          libgbm-dev \
+          libdrm-dev 
           ldd /github/home/.cache/puppeteer/chrome/linux-123.0.6312.58/chrome-linux64/chrome
           npm run install:chrome
           npm run server-storycap
