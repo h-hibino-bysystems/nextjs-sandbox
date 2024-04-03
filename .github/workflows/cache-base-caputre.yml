@@ -28,6 +28,9 @@ jobs:
         working-directory: ./nextjs-sandbox
         run: npm ci
 
+      # TODO chromiumのキャッシュをどうするか
+      # puppeteerのバージョンをキーとしてchromium本体のバイナリをキャッシュする？
+      # 依存関係のキャッシュをどうする？
       - name: Set up chromium
         working-directory: ./nextjs-sandbox
         run: |
@@ -53,6 +56,7 @@ jobs:
           npm run install:chrome
 
       - name: Run storycap
+        working-directory: ./nextjs-sandbox
         run: |
           npm run server-storycap
           mkdir .reg
