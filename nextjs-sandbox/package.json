@@ -11,7 +11,7 @@
     "build-storybook": "storybook build -o ./storybook-static",
     "storycap": "storycap http://localhost:6006 -o .reg/expected --exclude \"Scrap/**\" --puppeteerLaunchConfig \"{ \\\"ignoreDefaultArgs\\\": [\\\"--hide-scrollbars\\\"] }\"",
     "install:chrome": "node node_modules/puppeteer/install.mjs",
-    "server-storycap": "storycap --serverCmd \"start-storybook -p 9001\" http://localhost:9001"
+    "server-storycap": "storycap --serverCmd \"npm run storybook\" http://localhost:6006 --serverTimeout 600000"
   },
   "dependencies": {
     "@conform-to/react": "^1.0.5",
