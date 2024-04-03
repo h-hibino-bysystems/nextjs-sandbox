@@ -48,6 +48,8 @@ jobs:
           libatk-bridge2.0-0 \
           libgtk-3-0
           npm run install:chrome
+          npm run storybook
+          npm run storycap
 
       # test.txt のキャッシュ
       - name: Cache test.txt
