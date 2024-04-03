@@ -18,10 +18,10 @@ jobs:
         with:
           ref: ${{ inputs.git-commit-hash }}
       - uses: actions/cache@v4
-          id: capture-cache
-          with:
-            path: nextjs-sandbox/.reg/expected
-            key: vrt-captures-${{ inputs.git-commit-hash }}
+        id: capture-cache
+        with:
+          path: nextjs-sandbox/.reg/expected
+          key: vrt-captures-${{ inputs.git-commit-hash }}
 
       - name: create cache
         if: steps.capture-cache.outputs.cache-hit != 'true'
@@ -32,9 +32,9 @@ jobs:
           cache: npm
           cache-dependency-path: ./nextjs-sandbox
 
-      # TODO chromiumのキャッシュをどうするか
-      # puppeteerのバージョンをキーとしてchromium本体のバイナリをキャッシュする？
-      # 依存関係のキャッシュをどうする？
+        # TODO chromiumのキャッシュをどうするか
+        # puppeteerのバージョンをキーとしてchromium本体のバイナリをキャッシュする？
+        # 依存関係のキャッシュをどうする？
         run: |
           npm ci
 
