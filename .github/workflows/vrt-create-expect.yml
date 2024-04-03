@@ -8,10 +8,6 @@ on:
 
 jobs:
   cache-expected-captures:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    container:
-      image: node:20
     uses: ./.github/workflows/cache-base-caputre.yml
     with:
       git-commit-hash: ${{ github.sha }}
