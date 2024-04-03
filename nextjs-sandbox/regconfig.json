@@ -1,7 +1,7 @@
 {
   "core": {
     "workingDir": ".reg",
-    "actualDir": ".__screenshots__",
+    "actualDir": "__screenshots__",
     "thresholdRate": 0,
     "matchingThreshold": 0,
     "enableAntialias": true,
