@@ -7,28 +7,69 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  cache-expected-captures:
+    uses: ./.github/workflows/cache-base-caputre.yml
+    with:
+      git-commit-hash: ${{ github.event.pull_request.base.sha }}
+
   display-cache:
     runs-on: ubuntu-latest
     container:
       image: node:20
-
+    needs: [cache-expected-captures]
     steps:
-      # キャッシュの復元
+      - uses: actions/checkout@v4
+
       - name: Cache test.txt
         uses: actions/cache/restore@v4
         with:
-          path: nextjs-sandbox/.reg/**
-          key: vrt-captures-${{ github.sha }} # defaultブランチの最新のキャッシュを参照したい
-          restore-keys: |
-            vrt-captures-
+          path: nextjs-sandbox/.reg/expected
+          key: vrt-captures-${{ github.event.pull_request.base.sha }}
 
-      # キャッシュされた test.txt を表示
-      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: npm
+          cache-dependency-path: ./nextjs-sandbox
 
-      - name: Display cached test.txt
+      - name: Run Test
+        working-directory: ./nextjs-sandbox
         run: |
-          if [ -f nextjs-sandbox/.reg/test.txt ]; then
-            cat nextjs-sandbox/.reg/test.txt
-          else
-            echo "Cache file does not exist."
-          fi
+          npm ci
+
+          apt-get update
+          apt-get install -y \
+          libx11-xcb1 \
+          libxcomposite1 \
+          libxcursor1 \
+          libxdamage1 \
+          libxi6 \
+          libxtst6 \
+          libcups2 \
+          libxss1 \
+          libxrandr2 \
+          libasound2 \
+          libpango-1.0-0 \
+          libatk1.0-0 \
+          libatk-bridge2.0-0 \
+          libgtk-3-0 \
+          libnss3 \
+          libgbm-dev \
+          libdrm-dev 
+
+          npm run install:chrome
+          npm run server-storycap
+          npm run reg-suit
+
+      - name: Post comments
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr comment -F ./comments "${URL}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.sha }}
+          path: ./nextjs-sandbox/.reg
