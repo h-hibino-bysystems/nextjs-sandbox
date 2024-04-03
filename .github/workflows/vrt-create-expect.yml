@@ -50,6 +50,7 @@ jobs:
           ldd /github/home/.cache/puppeteer/chrome/linux-123.0.6312.58/chrome-linux64/chrome
           npm run install:chrome
           npm run server-storycap
+          mkdir .reg
           mv __screenshots__ .reg/expected
 
       - name: Upload artifact
