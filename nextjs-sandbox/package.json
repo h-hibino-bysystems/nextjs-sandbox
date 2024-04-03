@@ -12,7 +12,7 @@
     "storycap": "storycap http://localhost:6006 -o .reg/expected --exclude \"Scrap/**\" --puppeteerLaunchConfig \"{ \\\"ignoreDefaultArgs\\\": [\\\"--hide-scrollbars\\\"] }\"",
     "install:chrome": "node node_modules/puppeteer/install.mjs",
     "server-storycap": "storycap --serverCmd \"npm run storybook\" http://localhost:6006 --serverTimeout 600000",
-    "reg-suite": "reg-suite compare"
+    "reg-suit": "reg-suit compare"
   },
   "dependencies": {
     "@conform-to/react": "^1.0.5",
