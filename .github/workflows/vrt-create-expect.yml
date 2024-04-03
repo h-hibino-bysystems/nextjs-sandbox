@@ -13,5 +13,5 @@ jobs:
     container:
       image: node:20
     uses: ./.github/workflows/cache-base-caputre.yml
-      with:
-        git-commit-hash: ${{ github.sha }}
+    with:
+      git-commit-hash: ${{ github.sha }}
