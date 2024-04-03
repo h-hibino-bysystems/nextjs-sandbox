@@ -28,9 +28,6 @@ jobs:
       - name: Set up chromium
         working-directory: ./nextjs-sandbox
         run: |
-          mkdir .reg
-          echo "testtext-changed-2" > .reg/test.txt
-
           apt-get update
           apt-get install -y \
           libx11-xcb1 \
@@ -55,18 +52,15 @@ jobs:
           npm run server-storycap
           mv __screenshots__ .reg/expected
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: my-artifact
           path: nextjs-sandbox/.reg/expected
 
       # test.txt のキャッシュ
-      # - name: Cache test.txt
-      #   uses: actions/cache/save@v4
-      #   with:
-      #     path: nextjs-sandbox/.reg/
-      #     key: vrt-captures-${{ github.sha }}
-
-      # # test.txt がキャッシュされているか確認
-      # - name: Check if test.txt is cached
-      #   run: cat nextjs-sandbox/.reg/test.txt
+      - name: Cache expected captures
+        uses: actions/cache/save@v4
+        with:
+          path: nextjs-sandbox/.reg/expected
+          key: vrt-captures-${{ github.sha }}
