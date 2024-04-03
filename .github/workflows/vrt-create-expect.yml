@@ -53,14 +53,21 @@ jobs:
           ldd /github/home/.cache/puppeteer/chrome/linux-123.0.6312.58/chrome-linux64/chrome
           npm run install:chrome
           npm run server-storycap
+          mv __screenshots__ .reg/expected
+
+      - uses: actions/upload-artifact@v2
+        working-directory: ./nextjs-sandbox
+        with:
+          name: my-artifact
+          path: .reg/expected
 
       # test.txt のキャッシュ
-      - name: Cache test.txt
-        uses: actions/cache/save@v4
-        with:
-          path: nextjs-sandbox/.reg/
-          key: vrt-captures-${{ github.sha }}
+      # - name: Cache test.txt
+      #   uses: actions/cache/save@v4
+      #   with:
+      #     path: nextjs-sandbox/.reg/
+      #     key: vrt-captures-${{ github.sha }}
 
-      # test.txt がキャッシュされているか確認
-      - name: Check if test.txt is cached
-        run: cat nextjs-sandbox/.reg/test.txt
+      # # test.txt がキャッシュされているか確認
+      # - name: Check if test.txt is cached
+      #   run: cat nextjs-sandbox/.reg/test.txt
