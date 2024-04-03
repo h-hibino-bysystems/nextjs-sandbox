@@ -56,10 +56,9 @@ jobs:
           mv __screenshots__ .reg/expected
 
       - uses: actions/upload-artifact@v2
-        working-directory: ./nextjs-sandbox
         with:
           name: my-artifact
-          path: .reg/expected
+          path: nextjs-sandbox/.reg/expected
 
       # test.txt のキャッシュ
       # - name: Cache test.txt
