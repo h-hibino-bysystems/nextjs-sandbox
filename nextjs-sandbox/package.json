@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o ./storybook-static",
+    "storycap": "storycap http://localhost:6006 -o .reg/expected --exclude \"Scrap/**\" --puppeteerLaunchConfig \"{ \\\"ignoreDefaultArgs\\\": [\\\"--hide-scrollbars\\\"] }\"",
+    "install:chrome": "node node_modules/puppeteer/install.mjs",
+    "server-storycap": "storycap --serverCmd \"npm run storybook\" http://localhost:6006 --serverTimeout 600000"
   },
   "dependencies": {
     "@conform-to/react": "^1.0.5",
@@ -22,8 +27,17 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@storybook/addon-essentials": "^8.0.5",
+    "@storybook/addon-interactions": "^8.0.5",
+    "@storybook/addon-links": "^8.0.5",
+    "@storybook/addon-mdx-gfm": "^8.0.5",
+    "@storybook/nextjs": "^8.0.5",
+    "storybook": "^8.0.5",
+    "storycap": "^4.3.1",
+    "puppeteer": "^22.6.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
+    "eslint-plugin-storybook": "^0.6.15",
     "prettier": "3.2.5",
     "typescript": "^5"
   }

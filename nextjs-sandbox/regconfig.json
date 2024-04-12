@@ -1,0 +1,12 @@
+{
+  "core": {
+    "workingDir": ".reg",
+    "actualDir": ".storycap/test",
+    "thresholdRate": 0,
+    "matchingThreshold": 0,
+    "enableAntialias": true,
+    "ximgdiff": {
+      "invocationType": "none"
+    }
+  }
+}
