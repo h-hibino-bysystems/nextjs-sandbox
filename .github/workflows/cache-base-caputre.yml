@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     container:
-      image: node:20
+      image: mcr.microsoft.com/playwright:v1.43.0-jammy
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,25 +40,6 @@ jobs:
         run: |
           npm ci
 
-          apt-get update
-          apt-get install -y \
-          libx11-xcb1 \
-          libxcomposite1 \
-          libxcursor1 \
-          libxdamage1 \
-          libxi6 \
-          libxtst6 \
-          libcups2 \
-          libxss1 \
-          libxrandr2 \
-          libasound2 \
-          libpango-1.0-0 \
-          libatk1.0-0 \
-          libatk-bridge2.0-0 \
-          libgtk-3-0 \
-          libnss3 \
-          libgbm-dev \
-          libdrm-dev 
           npm run install:chrome
           npm run server-storycap
           mkdir .reg
